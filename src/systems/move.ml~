@@ -1,0 +1,14 @@
+open Components
+
+type t = movable
+
+let init _ = ()
+
+let update dt el =
+  print_float dt; print_newline ();
+  Seq.iter (fun (e:t) ->
+      let vel = e#velocity#get in
+      e#position#set (Vector.add e#position#get (Vector.mult (dt /. 60.) vel));
+      e#velocity#set Vector.zero
+    ) el
+

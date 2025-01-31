@@ -1,0 +1,16 @@
+open Ecs
+open Components
+open Systems_def
+
+let chara txt x y width height =
+  let e = new character in
+  e#texture#set txt;
+  e#position#set Vector.{x= float x; y = float y};
+  e#box#set Rect.{width; height};
+
+  Draw_system.(register (e :> t));
+  Move_system.(register (e :> t));
+  e
+
+let move_chara (c:character) v =
+  c#velocity#set v 
